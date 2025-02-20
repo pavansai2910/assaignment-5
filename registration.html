@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Validation with RegEx</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            margin-top: 220px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 40%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Data Validation</h2>
+        
+        <label>Email:</label>
+        <input type="text" id="email">
+        <span id="emailError" class="error"></span>
+
+        <label>Phone:</label>
+        <input type="text" id="phone">
+        <span id="phoneError" class="error"></span>
+
+        <label>Username:</label>
+        <input type="text" id="username">
+        <span id="usernameError" class="error"></span>
+
+        <label>Password:</label>
+        <input type="password" id="password">
+        <span id="passwordError" class="error"></span>
+
+        <button onclick="validateForm()">Validate</button>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Regular Expressions
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            var phonePattern = /^\d{10}$/;
+            var usernamePattern = /^[a-zA-Z0-9]{5,15}$/;
+            var passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            // Get input values
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Validate Email
+            document.getElementById("emailError").textContent = emailPattern.test(email) ? "" : "Invalid email format";
+
+            // Validate Phone
+            document.getElementById("phoneError").textContent = phonePattern.test(phone) ? "" : "Phone must be 10 digits";
+
+            // Validate Username
+            document.getElementById("usernameError").textContent = usernamePattern.test(username) ? "" : "5-15 alphanumeric characters only";
+
+            // Validate Password
+            document.getElementById("passwordError").textContent = passwordPattern.test(password) ? "" : "Min 8 chars, 1 uppercase, 1 number, 1 special character";
+        }
+    </script>
+
+</body>
+</html>
